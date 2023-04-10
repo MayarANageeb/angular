@@ -1,0 +1,119 @@
+<div class="w-75 mx-auto py-5">
+    <h1>Registeration Form</h1>
+    <div *ngIf="error" class="alert alert-danger m-2">
+        {{error}}
+
+    </div>
+    <!-- <div>{{registerform.get('First_name')?.errors|json}}</div> -->  
+   <form [formGroup]="registerForm" (ngSubmit)="registerdata(registerForm)">
+    {{registerForm.value|json}}
+<div class="form-group">
+    <label>First_Name:</label>
+    <br>
+    <input type="text" [class.is-invalid]="registerForm.get('First_name')?.invalid&&registerForm.get('First_name')?.touched" formControlName="First_name" class="form-control">
+    
+    <div *ngIf="registerForm.get('First_name')?.errors !=null && registerForm.get('First_name')?.touched"
+     class="alert alert-danger mt-1" >
+        <p *ngIf="registerForm.get('First_name')?.errors?.['required']">This field is required</p>
+        <small *ngIf="registerForm.get('First_name')?.errors?.['maxLength']">This field is maxLength is 20</small>
+        <small *ngIf="registerForm.get('First_name')?.errors?.['minLength']">This field is minLength is 3</small>
+        <small *ngIf="registerForm.get('First_name')?.errors?.['firstnamevalidation']">Admin is not allowed </small>
+
+    </div>
+</div>
+<div class="form-group">
+    <label>Last_Name:</label>
+    <br>
+    <input type="text" formControlName="Last_name" class="form-control">
+    <!-- <div class="alert alert-danger mt-1">
+        <p>this field is required</p>
+        <p>this field is maxLength=20</p>
+    
+
+    </div> -->
+</div>
+<div class="form-group">
+    <label>Email:</label>
+    <br>
+    <input type="text" formControlName="Email" class="form-control"  [class.is-invalid]="registerForm.get('Email')?.invalid&&registerForm.get('Email')?.touched">
+    <p  *ngIf="registerForm.get('Email')?.invalid&&registerForm.get('Email')?.touched"> Email is required</p>
+    <!-- <div class="alert alert-danger mt-1">
+       
+        <p>this field must contain . and @</p>
+    
+
+    </div> -->
+</div>
+<div>
+<input type="checkbox" formControlName="subscribe" class="form-check-input" (click)="setemailvalidation()">
+<label class="form-check-label"> send me offers</label>
+</div>
+<button class="btn btn-danger float right" (click)="AddAlternativEmails()">Add new Email</button>
+<div formArrayName="aleternativeEmails" 
+*ngFor="let email of aleternativeEmails.controls;let i=index">
+<label>Alternative Email {{i+1}}</label>
+<input type="text" class="form-control" [formControlName]="i">
+<button class="btn btn-danger" (click)="deleteEmail(i)">delete</button>
+
+
+</div>
+<div class="form-group">
+    <label>Password:</label> 
+    <br>
+    <input type="Password" formControlName="Password" class="form-control">
+    <small  class="text-dnager" *ngIf="registerForm.errors?.['MisMatch']">MisMatch Password </small>
+    <!-- <div class="alert alert-danger mt-1">
+        <p>this field is required</p>
+        <p>this field is maxm</p>
+    
+
+    </div> -->
+</div>
+<div class="form-group">
+    <label>ConfirmedPassword:</label>
+    <br>
+    <input type="Password" formControlName="ConfirmPassword" class="form-control">
+    <small  class="text-dnager" *ngIf="registerForm.errors?.['MisMatch']">MisMatch ConfirmPassword </small>
+    <!-- <div class="alert alert-danger mt-1">
+        <p>this field is required</p>
+        <p>this field is maxm</p>
+    
+
+    </div> -->
+</div>
+<div formGroupName="address"  class="form-group">
+ <div >
+    <label>State:</label>
+    <br>
+    <input type="text" formControlName="state" class="form-control">
+    <!-- <div class="alert alert-danger mt-1">
+       
+    
+
+    </div> -->
+</div> 
+<div >
+    <label>city:</label>
+    <br>
+    <input type="text" formControlName="city" class="form-control">
+    <!-- <div class="alert alert-danger mt-1">
+     
+    
+
+    </div> -->
+</div>
+<div >
+    <label>postatCode:</label>
+    <br>
+    <input type="text" formControlName="postalcode" class="form-control">
+    <!-- <div class="alert alert-danger mt-1">
+    
+    
+
+    </div> -->
+</div>
+</div>
+<button class="btn btn-success" [disabled]="registerForm.invalid"   type="submit" >Register</button>
+   </form>
+   <!-- [disabled]="registerForm.invalid" -->
+</div>

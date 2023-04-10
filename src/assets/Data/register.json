@@ -1,0 +1,28 @@
+[
+    {
+      "First_name": "mayar",
+      "Last_name":"Atef",
+      "Email":"mayar.atef.5100@gmail.com",
+      "Password":"123",
+      "ConfirmPassword":"123",
+      "state":"Egypt",
+      "city":"assuit",
+      "postalcode":"9999",
+      "aleternativeEmails":[]
+    
+  },
+  {
+    "First_name": "menna",
+    "Last_name":"Atef",
+    "Email":"menna.atef.5100@gmail.com",
+    "Password":"123",
+    "ConfirmPassword":"123",
+    "state":"Egypt",
+    "city":"assuit",
+    "postalcode":"9999",
+    "aleternativeEmails":[]
+    
+  
+  }
+]
+  

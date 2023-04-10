@@ -1,0 +1,12 @@
+
+<div class="card"  style="width: 18rem;" *ngFor="let item of postslist">
+    <div class="card-body">
+      <h5 class="card-title">userID:{{item.userId}}</h5>
+      <h5 class="card-text">ID:{{item.id}}</h5>
+      <p class="card-text">Title:{{item.title}}</p>
+      <p class="card-text">body:{{item.body}}</p>
+      <button type="button" class="btn btn-success"(click)="viewcomments(item)" routerLink="/posts">view post comments </button>
+    </div>
+  </div>
+
+  {{errormessage}}

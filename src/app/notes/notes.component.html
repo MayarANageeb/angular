@@ -1,0 +1,49 @@
+<div class="w-75 mx-auto py-5">
+    <h1>Notes Form</h1>
+   <form [formGroup]="notesForm" (ngSubmit)="notesdata(notesForm)">
+    {{notesForm.value|json}}
+<div class="form-group">
+    <label>Name:</label>
+    <br>
+    <input type="text" [class.is-invalid]="notesForm.get('name')?.invalid&&notesForm.get('name')?.touched" formControlName="name" class="form-control">
+    
+    <div *ngIf="notesForm.get('name')?.errors !=null && notesForm.get('name')?.touched"
+     class="alert alert-danger mt-1" >
+         <small *ngIf="notesForm.get('name')?.errors?.['required']">This field is required</small> 
+        <small *ngIf="notesForm.get('name')?.errors?.['namevalidation']">Admin or adminstator are not allowed </small>
+
+    </div>
+</div>
+<div class="dropdown" class="form-group">
+   
+  <select formControlName="product">
+    <option *ngFor="let item of ProductList" value="{{item.Name}}">{{item.Name}}</option>
+  </select>
+  </div>
+
+<div>
+    <!-- (click)="Discountvalidation()" -->
+    <input type="checkbox" formControlName="discount" class="form-check-input" (click)="Discountvalidation()">
+    <label class="form-check-label">(Does this product containd discount)</label>
+    <div *ngIf="notesForm.get('discount')?.value">
+    <label class="form-check-label">Enter the Discount Value</label>
+    <br>
+    <input type="text" formControlName="value" class="form-input" >
+  
+    
+</div>
+</div>
+
+    <button class="btn btn-danger float right" (click)="addcomment()">Add New Comment</button>
+    <br>
+    <br>
+<div formArrayName="comments" *ngFor="let comment of comments.controls;let i=index">
+<label>New Comment Number:{{i+1}}</label>
+<input type="text" class="form-control" [formControlName]="i">
+<br>
+<button class="btn btn-danger" (click)="deleteComment(i)">Delete this Comment </button>
+
+</div>
+<button class="btn btn-success" [disabled]="notesForm.invalid"  type="submit">NotesButton</button>
+
+</form>
